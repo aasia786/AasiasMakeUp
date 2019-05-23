@@ -1,14 +1,15 @@
 package com.queen.aasiasmakeup;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -64,7 +65,17 @@ public class MainActivity extends Activity {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new MakeUpAdapter(productsList);
+        mAdapter = new MakeUpAdapter(productsList, getAdapterListener(), this);
         recyclerView.setAdapter(mAdapter);
+    }
+
+    private MakeUpAdapter.OnItemClickListener getAdapterListener() {
+        return new MakeUpAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Products item) {
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                startActivity(intent);
+            }
+        };
     }
 }
