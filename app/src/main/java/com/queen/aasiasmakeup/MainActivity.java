@@ -73,7 +73,9 @@ public class MainActivity extends Activity {
         return new MakeUpAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Products item) {
+                Gson gson = new Gson();
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                intent.putExtra("key", gson.toJson(item));
                 startActivity(intent);
             }
         };
