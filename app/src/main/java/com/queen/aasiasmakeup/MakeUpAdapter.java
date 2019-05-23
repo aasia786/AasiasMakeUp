@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class MakeUpAdapter extends RecyclerView.Adapter<MakeUpAdapter.ViewHolder> {
-    private List<String> values;
+    private List<Products> values;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -29,7 +29,7 @@ public class MakeUpAdapter extends RecyclerView.Adapter<MakeUpAdapter.ViewHolder
         }
     }
 
-    public void add(int position, String item) {
+    public void add(int position, Products item) {
         values.add(position, item);
         notifyItemInserted(position);
     }
@@ -40,7 +40,7 @@ public class MakeUpAdapter extends RecyclerView.Adapter<MakeUpAdapter.ViewHolder
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MakeUpAdapter(List<String> myDataset) {
+    public MakeUpAdapter(List<Products> myDataset) {
         values = myDataset;
     }
 
@@ -61,10 +61,8 @@ public class MakeUpAdapter extends RecyclerView.Adapter<MakeUpAdapter.ViewHolder
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
-        final String name = values.get(position);
-        holder.txtHeader.setText(name);
+        final Products product = values.get(position);
+        holder.txtHeader.setText(product.getName());
         holder.txtHeader.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +70,7 @@ public class MakeUpAdapter extends RecyclerView.Adapter<MakeUpAdapter.ViewHolder
             }
         });
 
-        holder.txtFooter.setText("Footer: " + name);
+        holder.txtFooter.setText("Footer: " + product.getProduct_type());
     }
 
     // Return the size of your dataset (invoked by the layout manager)

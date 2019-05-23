@@ -27,20 +27,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-        // use this setting to
-        // improve performance if you know that changes
-        // in content do not change the layout size
-        // of the RecyclerView
-        recyclerView.setHasFixedSize(true);
-        // use a linear layout manager
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        List<String> input = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            input.add("Test" + i);
-        }// define an adapter
-        mAdapter = new MakeUpAdapter(input);
-        recyclerView.setAdapter(mAdapter);
 
         appelServeur();
     }
@@ -63,7 +49,7 @@ public class MainActivity extends Activity {
             public void onResponse(Call<List<Products>> call, Response<List<Products>> response) {
                 if(response.isSuccessful()) {
                     List<Products> productsList = response.body();
-
+                    displayList(productsList);
                 }
             }
 
@@ -72,5 +58,13 @@ public class MainActivity extends Activity {
 
             }
         });
+    }
+
+    private void displayList(List<Products> productsList) {
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        mAdapter = new MakeUpAdapter(productsList);
+        recyclerView.setAdapter(mAdapter);
     }
 }

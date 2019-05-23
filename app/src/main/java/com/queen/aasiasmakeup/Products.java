@@ -2,7 +2,8 @@ package com.queen.aasiasmakeup;
 
 public class Products {
 
-    String name;
+    private String name;
+    private String product_type;
 
     public String getName() {
         return name;
@@ -10,5 +11,9 @@ public class Products {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getProduct_type() {
+        return product_type;
     }
 }
